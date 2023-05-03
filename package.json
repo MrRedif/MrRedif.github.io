@@ -13,18 +13,5 @@
   },
   "dependencies": {
     "three": "^0.152.2"
-  },
-  "main": "counter.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MrRedif/MrRedif.github.io.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MrRedif/MrRedif.github.io/issues"
-  },
-  "homepage": "https://github.com/MrRedif/MrRedif.github.io#readme",
-  "description": ""
+  }
 }
