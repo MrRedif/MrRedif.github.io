@@ -1,6 +1,9 @@
 import '/style.css'
 
 import * as THREE from 'three';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader';
+
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,0.1,1000);
@@ -13,28 +16,84 @@ renderer.setSize(window.innerWidth,window.innerHeight);
 camera.position.set(0,10,50);
 camera.rotateX(0.05);
 
-const geometry = new THREE.IcosahedronGeometry(10,0); //new THREE.TorusGeometry(10,4,32,100);
-const material = new THREE.MeshStandardMaterial({color:0xFFb321});
-const torus = new THREE.Mesh(geometry,material);
-scene.add(torus);
 
-const light = new THREE.AmbientLight(0x0000ff,1);
-const plinght = new THREE.PointLight(0xff0000,0.5);
+const rotPoint = new THREE.Object3D();
+rotPoint.add(camera);
+scene.add(rotPoint);
+
+const plinght = new THREE.PointLight(0xffffff,0.8);
+
+const rotPointDown = new THREE.Object3D();
+rotPointDown.position.set(0,-5,0);
+plinght.position.set(0,0,15);
+
+rotPointDown.add(plinght);
+rotPoint.add(rotPointDown);
+
+//const geometry = new THREE.IcosahedronGeometry(10,0); //new THREE.TorusGeometry(10,4,32,100);
+//const material = new THREE.MeshStandardMaterial({color:0xFFb321});
+//const torus = new THREE.Mesh(geometry,material);
+//scene.add(torus);
+
+
+const loader = new OBJLoader();
+
+var bird = null;
+loader.load("models/bird.obj", function(obj){
+  obj.scale.set(10,10,10);
+  obj.rotation.set(0,-90,0);
+
+  for(var i in obj.children){
+    obj.children[i].material = new THREE.MeshStandardMaterial({color: 0xff0000, emissive: 0x450000 });
+    obj.children[i].material.color = {isColor: true, r: 0.5, g: 0, b: 0.02};
+    if(i == 4 || i== 3) obj.children[i].material.color = {isColor: true, r: 1, g: 1, b: 0.3};
+
+    if(i == 5)obj.children[i].material.color = {isColor: true, r: 0, g: 0, b: 0};
+  }
+  bird = obj;
+  scene.add(obj);
+});
+
+
+
+const light = new THREE.AmbientLight(0xffffff,0.1);
 scene.add(light);
 
-plinght.position.set(0,20,0);
-scene.add(plinght);
-var tim = 0;
+//const gridHelper = new THREE.GridHelper(200,50);
+//scene.add(gridHelper);
+//const controls = new OrbitControls(camera,renderer.domElement);
+
+
+function addStar(){
+  const geometry = new THREE.SphereGeometry(0.25,24,24);
+  const material = new THREE.MeshStandardMaterial({color: 0xffffff});
+  const star = new THREE.Mesh(geometry,material);
+
+  const [x,y,z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(300));
+  star.position.set(x,y,z);
+  scene.add(star);
+}
+Array(200).fill().forEach(addStar);
+
+
+//Resize Listener
+window.addEventListener('resize',() =>{
+  //Update Camera
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth ,window.innerHeight);
+})
+
+
+
 
 function animate(){
   requestAnimationFrame(animate);
-
-  plinght.translateX(Math.sin(tim)*100);
-  plinght.translateZ(Math.sin(tim)*100);
-  torus.rotateY(0.001);
-  torus.rotateZ(0.003);
-  torus.rotateX(0.005);
-  tim += 0.001
+  rotPoint.rotateY(0.001);
+  bird?.rotateX(0.003);
+  bird?.rotateY(-0.005);
+  bird?.rotateZ(0.007);
+  //controls.update();
   renderer.render(scene,camera);
 }
 animate();
