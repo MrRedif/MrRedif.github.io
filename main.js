@@ -39,7 +39,7 @@ rotPoint.add(rotPointDown);
 const loader = new OBJLoader();
 
 var bird = null;
-loader.load("models/bird.obj", function(obj){
+loader.load("/bird.obj", function(obj){
   obj.scale.set(10,10,10);
   obj.rotation.set(0,-90,0);
 
