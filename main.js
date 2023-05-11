@@ -4,7 +4,6 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { OBJLoader } from 'three/addons/loaders/OBJLoader';
 
-
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,0.1,1000);
 const renderer = new THREE.WebGLRenderer({
@@ -39,9 +38,10 @@ rotPoint.add(rotPointDown);
 const loader = new OBJLoader();
 
 var bird = null;
-loader.load("/bird.obj", function(obj){
+loader.load("bird.obj", function(obj){
   obj.scale.set(10,10,10);
   obj.rotation.set(0,-90,0);
+  obj.position.set(0,-10,0);
 
   for(var i in obj.children){
     obj.children[i].material = new THREE.MeshStandardMaterial({color: 0xff0000, emissive: 0x450000 });
@@ -61,7 +61,7 @@ scene.add(light);
 
 //const gridHelper = new THREE.GridHelper(200,50);
 //scene.add(gridHelper);
-//const controls = new OrbitControls(camera,renderer.domElement);
+const controls = new OrbitControls(camera,renderer.domElement);
 
 
 function addStar(){
@@ -75,17 +75,13 @@ function addStar(){
 }
 Array(200).fill().forEach(addStar);
 
-
 //Resize Listener
 window.addEventListener('resize',() =>{
   //Update Camera
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth ,window.innerHeight);
-})
-
-
-
+});
 
 function animate(){
   requestAnimationFrame(animate);
@@ -93,7 +89,7 @@ function animate(){
   bird?.rotateX(0.003);
   bird?.rotateY(-0.005);
   bird?.rotateZ(0.007);
-  //controls.update();
+  controls.update();
   renderer.render(scene,camera);
 }
 animate();
