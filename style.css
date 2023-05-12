@@ -5,6 +5,27 @@ canvas{
   z-index: -1;
 }
 
+.howerBlue:hover h3{
+  letter-spacing: 0.2vw;
+  font-weight: 900;
+  color: aqua;
+}
+.howerDarkBlue:hover h3{
+  letter-spacing: 0.2vw;
+  font-weight: 900;
+  color: #0c9fee;
+}
+.howerRed:hover h3{
+  letter-spacing: 0.2vw;
+  font-weight: 900;
+  color: #FF1010;
+}
+.howerPink:hover h3{
+  letter-spacing: 0.2vw;
+  font-weight: 900;
+  color: #FA5C5C;
+}
+
 
 .header{
   position: relative;
@@ -12,54 +33,51 @@ canvas{
   display: flex;
   justify-content: center;
   font-family: 'Poiret One', cursive;
-  top: 1.25rem;
 }
 
 .title{
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2%;
 }
 
 .header h1{
   color: white;
-  font-size: 8rem;
+  font-size: 8.5vw;
   font-weight: 400;
-  margin:0.25rem 0rem;
-  height: 8rem;
+  margin:0.25% 0rem;
+  height: 8.5vw;
+  text-align: center;
 }
 
 .header h2{
   color: white;
-  font-size: 2rem;
+  font-size: 2.75vw;
   font-weight: 400;
-  margin:0.25rem 0rem;
+  margin:0.5% 0rem;
   display: flex;
   justify-content: center;
-  letter-spacing: 1.75rem;
+  letter-spacing: 2.5vw;
   text-decoration: underline;
-  text-decoration-thickness: 0.1rem;
-  text-underline-offset: 0.75rem;
+  text-decoration-thickness: 0.1vw;
+  text-underline-offset: 0.75vw;
 }
 
 .flexer{
   display: flex;
   align-items: center;
-  margin: 1.75rem 0rem;
-  height: 2rem;
+  margin: 2% 0rem;
+  height: 2vw;
 }
 
 .header h3{
   color: white;
-  font-size: 2rem;
+  font-size: 2.75vw;
   font-weight: 400;
-  transition: all 0.25s ease-in-out 100ms;
+  transition: all 0.15s ease-in-out 100ms;
 }
 
-.header h3:hover{
-  color: aqua;
-  letter-spacing: 0.2rem;
-}
 
 a{
   text-decoration: none;
@@ -74,5 +92,7 @@ a{
 .icon{
   max-width: 100%;
   max-height: 100%;
-  margin: 0.25rem;
+  margin: 0.75vw;
 }
+
+
