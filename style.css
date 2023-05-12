@@ -29,7 +29,6 @@ canvas{
 
 .header{
   position: relative;
-  top: 0px;
   display: flex;
   justify-content: center;
   font-family: 'Poiret One', cursive;
@@ -49,7 +48,30 @@ canvas{
   margin:0.25% 0rem;
   height: 8.5vw;
   text-align: center;
+  transition: all 0.15s ease-out 10ms;
+  padding: 1vw;
 }
+
+.footer{
+  left: 50%;
+  bottom: 1%;
+  translate: -50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  font-family: 'Poiret One', cursive;
+  color: white;
+  white-space: nowrap;
+}
+
+.footer h2{
+  transition: all 1s ease-out 10ms;
+}
+
+.footer:hover h2{
+  letter-spacing: 1.5vw;
+}
+
 
 .header h2{
   color: white;
@@ -71,11 +93,37 @@ canvas{
   height: 2vw;
 }
 
+.bigFlexer{
+  display: flex;
+  align-items: center;
+  margin: 2% 0rem;
+  height: 6vw;
+}
+
+#honor{
+  width: 11vw;
+  height: 8.5vw;
+}
+#honor::before{
+  content: '';
+  animation: fade-honor 18s linear infinite;
+}
+
+#name{
+  width: 15vw;
+  height: 8.5vw;
+}
+
+#name::before{
+  content: '';
+  animation: fade-name 18s linear infinite;
+}
+
 .header h3{
   color: white;
   font-size: 2.75vw;
   font-weight: 400;
-  transition: all 0.15s ease-in-out 100ms;
+  transition: all 0.15s ease-out 10ms, color 0.001ms;
 }
 
 
@@ -93,6 +141,97 @@ a{
   max-width: 100%;
   max-height: 100%;
   margin: 0.75vw;
+}
+
+#cameraButton{
+  color: black;
+  font-weight: 900;
+  font-size: 3vw;
+  font-family: 'Poiret One', cursive;
+  background-color: white;
+  background-size: cover;
+  width: fit-content;
+  margin: 0 0;
+  cursor: pointer;
+}
+
+@keyframes fade-honor {
+  0%{
+    content: 'Mr.';
+    opacity: 0%;
+  }
+  5%{
+    opacity: 100%;
+  }
+  45%{
+    opacity: 100%;
+    content: 'Mr.';
+  }
+  50%{
+    opacity: 0%;
+    content: 'Mr.';
+  }
+  50.001%{
+    content: 'Bay';
+  }
+  55%{
+    opacity: 100%;
+    content: 'Bay';
+  }
+  95%{
+    opacity: 100%;
+  }
+  100%{
+    opacity: 0%;
+    content: 'Bay';
+  }
+}
+
+@keyframes fade-name {
+  0%{
+    content: 'Redif';
+    opacity: 100%;
+  }
+  5%{
+    opacity: 100%;
+  }
+  20%{
+    opacity: 100%;
+    content: 'Redif';
+  }
+  25%{
+    opacity: 0%;
+    content: 'Redif';
+  }
+  25.001%{
+    content: 'Pdf';
+  }
+  30%{
+    opacity: 100%;
+    content: 'Pdf';
+  }
+  45%{
+    opacity: 100%;
+  }
+  70%{
+    opacity: 100%;
+  }
+  75%{
+    opacity: 0%;
+    content: 'Pdf';
+  }
+  75.0001%{
+    opacity: 0%;
+    content: 'Redif';
+  }
+  80%{
+    opacity: 100%;
+    content: 'Redif';
+  }
+  100%{
+    content: 'Redif';
+    opacity: 100%;
+  }
 }
 
 

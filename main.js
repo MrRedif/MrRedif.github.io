@@ -62,6 +62,8 @@ scene.add(light);
 //const gridHelper = new THREE.GridHelper(200,50);
 //scene.add(gridHelper);
 const controls = new OrbitControls(camera,renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
 
 
 function addStar(){
@@ -82,7 +84,19 @@ window.addEventListener('resize',() =>{
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth ,window.innerHeight);
 });
+var freezeRot = false;
+const camButton = document.getElementById('cameraButton');
 
+if(camButton != null)
+camButton.addEventListener('click',()=>{
+  camera.removeFromParent();
+  bird.add(camera);
+  camera.position.set(2,1,0);
+  controls.dampingFactor = 0;
+  freezeRot = true;
+});
+
+var i = 0
 function animate(){
   requestAnimationFrame(animate);
   rotPoint.rotateY(0.001);
@@ -90,6 +104,8 @@ function animate(){
   bird?.rotateY(-0.005);
   bird?.rotateZ(0.007);
   controls.update();
+  if(freezeRot)camera.rotation.set(0,1.6,0);
   renderer.render(scene,camera);
+  i+= 0.001;
 }
 animate();
